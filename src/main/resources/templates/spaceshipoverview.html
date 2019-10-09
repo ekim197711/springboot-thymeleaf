@@ -1,0 +1,30 @@
+<html xmlns:th="http://www.thymeleaf.org">
+<header>
+    <title>Spaceships</title>
+    <link rel="stylesheet" href="../css/spaceship.css" type="text/css"/>
+</header>
+
+<body>
+
+<div th:switch="${spaceships}">
+    <h1 th:case="null">NO spaceships!!! Please create some</h1>
+    <div th:case="*">
+        <h1>List of spaceships</h1>
+        <div class="container">
+            <div class="item" th:each="ship : ${spaceships}">
+                <div class="spaceshipfields">
+                    <div th:text="${ship.id}"></div>
+                    <div class="shipname" th:text="${ship.name}"></div>
+                    <div th:text="${ship.crew}"></div>
+                    <div>
+                        <a th:href="@{/spaceship/delete/{id}(id=${ship.id})}">
+                            Delete
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>
