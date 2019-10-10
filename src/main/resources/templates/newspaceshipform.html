@@ -1,20 +1,22 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <header>
     <title>Spaceships - Create new!</title>
-    <link rel="stylesheet" href="../css/spaceship.css" type="text/css"/>
+    <link rel="stylesheet" th:href="@{/css/newspaceship.css}" type="text/css"/>
 </header>
 
 <body>
 <div>
     <h1>Create new spaceship</h1>
-    <form action="#" th:action="@{/spaceship/create}" th:object="${spaceship}" method="post">
-        <div>
-            <label for="name">Name</label>
-            <input type="text" th:field="*{name}" id="name" placeholder="Name of the spacecraft">
+    <form action="#" th:action="@{/spaceship/new}" th:object="${spaceship}" method="post">
+        <div class="formcontainer">
+            <div class="item item-key">Name</div>
+            <div class="item item-input"><input type="text" th:field="*{name}" id="name" placeholder="Name of the spacecraft"></div>
+            <div th:if="${#fields.hasErrors('name')}" th:errors="*{name}" class="item fieldinvalid">No errors</div>
         </div>
-        <div>
-            <label for="crew">Number of crewmembers</label>
-            <input type="number" th:field="*{crew}" id="crew" placeholder="Number of crewmembers">
+        <div class="formcontainer">
+            <div class="item item-key">Number of crewmembers</div>
+            <div class="item item-input"><input type="number" th:field="*{crew}" id="crew" placeholder="Number of crewmembers"></div>
+            <div th:if="${#fields.hasErrors('crew')}" th:errors="*{crew}" class="item fieldinvalid">Crew errors</div>
         </div>
         <div>
             <input type="submit" value="Create Spaceship">

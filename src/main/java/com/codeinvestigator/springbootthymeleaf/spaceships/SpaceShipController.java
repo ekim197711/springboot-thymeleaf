@@ -3,9 +3,11 @@ package com.codeinvestigator.springbootthymeleaf.spaceships;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
+import org.springframework.validation.FieldError;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.PostConstruct;
+import javax.validation.Valid;
 import java.util.List;
 
 @Controller
@@ -32,8 +34,17 @@ public class SpaceShipController {
         return "newspaceshipform";
     }
 
-    @PostMapping("/create")
-    public String createSpaceshipInDatabase(SpaceShip spaceship, BindingResult bindingResult, Model model){
+    @PostMapping("/new")
+    public String createSpaceshipInDatabase(@Valid @ModelAttribute("spaceship") SpaceShip spaceship,
+                                            BindingResult bindingResult, Model model){
+
+        if (spaceship.getName().startsWith("F"))
+            bindingResult.addError(new FieldError("spaceship", "name", "We dont want " +
+                    "spaceships starting with an F!!!"));
+        if (bindingResult.hasErrors()){
+            return "newspaceshipform";
+        }
+
         repository.save(spaceship);
         return spaceships(model);
     }
