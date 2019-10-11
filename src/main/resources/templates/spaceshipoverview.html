@@ -1,10 +1,19 @@
 <html xmlns:th="http://www.thymeleaf.org">
-<header>
+<head>
     <title>Spaceships</title>
     <link rel="stylesheet" th:href="@{/css/spaceship.css}" type="text/css"/>
-</header>
+    <link rel="stylesheet" th:href="@{/css/navigation.css}" type="text/css"/>
+    <link rel="stylesheet" th:href="@{/css/many.css}" type="text/css"/>
+</head>
 
 <body>
+
+<div th:replace="fragments/navigation.html :: topNavigation(~{ :: .mylocation})">
+    <div class="mylocation">
+        Overview of spaceships
+    </div>
+</div>
+
 
 <div th:switch="${spaceships}">
     <h1 th:case="null">NO spaceships!!! Please create some</h1>
@@ -26,5 +35,14 @@
         </div>
     </div>
 </div>
+
+<div th:replace="${#lists.size(spaceships) > 5} ?
+~{fragments/manyornotmany.html :: many} :
+~{fragments/manyornotmany.html :: notmany}
+">
+    is going to be replaced test 123ælkf ladsjfæds ljf
+</div>
+
+
 </body>
 </html>
