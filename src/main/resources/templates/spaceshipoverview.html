@@ -1,48 +1,44 @@
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorator="~{mainlayout.html}"
+>
 <head>
-    <title>Spaceships</title>
+    <title>The overview</title>
     <link rel="stylesheet" th:href="@{/css/spaceship.css}" type="text/css"/>
-    <link rel="stylesheet" th:href="@{/css/navigation.css}" type="text/css"/>
     <link rel="stylesheet" th:href="@{/css/many.css}" type="text/css"/>
 </head>
 
 <body>
 
-<div th:replace="fragments/navigation.html :: topNavigation(~{ :: .mylocation})">
-    <div class="mylocation">
-        Overview of spaceships
-    </div>
-</div>
-
-
-<div th:switch="${spaceships}">
-    <h1 th:case="null">NO spaceships!!! Please create some</h1>
-    <div th:case="*">
-        <h1>List of spaceships</h1>
-        <div class="container">
-            <div class="item" th:each="ship : ${spaceships}">
-                <div class="spaceshipfields">
-                    <div th:text="${ship.id}"></div>
-                    <div class="shipname" th:text="${ship.name}"></div>
-                    <div th:text="${ship.crew}"></div>
-                    <div>
-                        <a th:href="@{/spaceship/delete/{id}(id=${ship.id})}">
-                            Delete
-                        </a>
+<div layout:fragment="mikes-content">
+    <div th:switch="${spaceships}">
+        <h1 th:case="null">NO spaceships!!! Please create some</h1>
+        <div th:case="*">
+            <h1>List of spaceships</h1>
+            <div class="container">
+                <div class="item" th:each="ship : ${spaceships}">
+                    <div class="spaceshipfields">
+                        <div th:text="${ship.id}"></div>
+                        <div class="shipname" th:text="${ship.name}"></div>
+                        <div th:text="${ship.crew}"></div>
+                        <div>
+                            <a th:href="@{/spaceship/delete/{id}(id=${ship.id})}">
+                                Delete
+                            </a>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-</div>
 
-<div th:replace="${#lists.size(spaceships) > 5} ?
+    <div th:replace="${#lists.size(spaceships) > 5} ?
 ~{fragments/manyornotmany.html :: many} :
 ~{fragments/manyornotmany.html :: notmany}
 ">
-    is going to be replaced test 123ælkf ladsjfæds ljf
+        is going to be replaced test 123ælkf ladsjfæds ljf
+    </div>
+
 </div>
-
-
 </body>
 </html>

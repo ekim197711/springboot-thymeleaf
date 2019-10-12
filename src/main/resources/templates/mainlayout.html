@@ -1,0 +1,23 @@
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+>
+<head>
+    <title layout:title-pattern="$LAYOUT_TITLE - $CONTENT_TITLE">Spaceship Application</title>
+    <link rel="stylesheet" th:href="@{/css/navigation.css}" type="text/css"/>
+    <link rel="stylesheet" th:href="@{/css/mikesfooter.css}" type="text/css"/>
+</head>
+<body>
+
+<div th:replace="fragments/navigation.html :: topNavigation(~{ :: .mylocation})">
+    <div class="mylocation">
+        Overview of spaceships
+    </div>
+</div>
+
+<section layout:fragment="mikes-content">adsfasfælsjdflkasæf</section>
+
+<div class="mikesfooter">
+    Mikes footer. This application is made by Mike. !!!! for demo purpose.
+</div>
+
+</body>

@@ -25,3 +25,14 @@
 .navlocation {
     background: rgb(10, 20, 150);
 }
+
+a:visited{
+    text-decoration: none;
+    color: white;
+}
+
+
+a{
+    text-decoration: none;
+    color: white;
+}
